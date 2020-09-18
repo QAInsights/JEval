@@ -19,11 +19,28 @@ def findThreadGroups(jmx):
     tree = ET.parse(jmx)
     root = tree.getroot()
     element = 'ThreadGroup'
-    print(str(countNode(root,element)))
+    #print(str(countNode(root,element)))
+    enabledCount = 0
 
     for node in root.iter(element):
-        print(node.attrib)
+        #Find Enabled Thread Group
+        if str.__contains__(str(node.attrib),'\'enabled\': \'true\''):            
+            #print(node.attrib)
+            #Find enabled count
+            enabledCount += 1
+            #Set flag for success
+            flag=1
+            message=f"Total number of Thread Groups enabled {enabledCount}"
 
+        else:
+            message="No thread groups enabled."
+            #Set flag for fail
+            flag=0
+    if flag == 1:
+        printGreen(message)
+    if flag == 0:
+        printRed(message)
+    
     return
 
 

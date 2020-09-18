@@ -6,7 +6,7 @@ def main():
         #print(str(sys.argv[1]))
         #print(f"JMeter file is {jmxFile}")
         # Open file
-        jmx = "C:\\Gits\\jeval\\jmx\\Sample.jmx"
+        jmx = "./jmx/Sample.jmx"
         with open(jmx,'r') as f:
             parseJMX(jmx)
         f.close()
