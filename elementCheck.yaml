@@ -1,0 +1,13 @@
+Elements:
+  - ResultCollector
+  - ResponseAssertion
+  - TransactionController
+  - CookieManager
+  - HeaderManager
+  - CacheManager
+  - ConfigTestElement
+  - RegexExtractor
+  - CSVDataSet
+  - UniformRandomTimer
+  - GaussianRandomTimer
+  - DebugSampler

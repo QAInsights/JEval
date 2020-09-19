@@ -4,9 +4,75 @@ import argparse
 import sys
 import fileinput
 import pdb
+import yaml
 
 from colorit import *
 
+def elementCheck(jmx):
+    with open('./elementCheck.yaml','r') as file:
+        try:
+            elements=yaml.safe_load(file)
+            for i, k in elements.items():
+                #print(i, k)
+                for element in k:
+                    #print(element)
+                    findElementStatus(jmx,element)
+
+        except yaml.YAMLError as e:
+            print(e)
+    return
+
+def findElementStatus(jmx, element):
+    tree = ET.parse(jmx)
+    root = tree.getroot()
+    #print(str(countNode(root,element)))
+    enabledCount = 0
+    flag = 0
+    message=f"No element found for {element}"
+
+    for node in root.iter(element):
+        if node.attrib is None:
+            printRed(message)
+        else:
+            if str.__contains__(str(node.attrib),'\'enabled\': \'true\''):            
+                #Find enabled count
+                enabledCount += 1
+                #Set flag for success
+                flag=1
+                message=f"{enabledCount} {element}(s) enabled."
+            else:
+                message=f"No {element} enabled."
+                #Set flag for fail
+                flag=0
+    
+    if flag == 1:
+        # Exception for ResultCollector
+        if element == 'ResultCollector':
+            message = f"{enabledCount} Listener(s) enabled."
+            printRed(message)
+        elif element == 'ResponseAssertion':
+            message = f"{enabledCount} Response Assertion(s) are enabled."
+            printRed(message)
+        elif element == 'DebugSampler':
+            message = f"{enabledCount} Debug Sampler(s) are enabled."
+            printRed(message)
+        else:
+            printGreen(message)
+    if flag == 0:
+        # Exception for ResultCollector
+        if element == 'ResultCollector':
+            message = f"{enabledCount} Listener(s) are enabled."
+            printGreen(message)
+        elif element == 'ResponseAssertion':
+            message = f"{enabledCount} Response Assertion(s) are enabled."
+            printGreen(message)
+        elif element == 'DebugSampler':
+            message = f"{enabledCount} Debug Sampler(s) are enabled."
+            printGreen(message)
+        else:
+            printRed(message)
+
+    return
 
 def countNode(root,element):
     count = 0
@@ -43,19 +109,6 @@ def findThreadGroups(jmx):
     
     return
 
-
-def validateListeners(jmx):
-    tree = ET.parse(jmx)
-    root = tree.getroot()
-    #Check 10 - Listeners Enable or Disable
-    #Find ResultCollector node(s) in the XML
-    #for tnode in root.iter('ThreadGroup'):
-        #for node in root.iter('ResultCollector'):
-            #if str.__contains__(str(node.attrib),'true'):
-                #print(node.attrib)
-
-    return 
-
 def findJMeterVersion(jmx):
     tree = ET.parse(jmx)
     # Get JMeter version
@@ -89,3 +142,17 @@ def printRed(message):
 def addRecommendation(recommendation):
     print(f"Recommendation: {recommendation}\n")    
     return
+
+'''
+def validateListeners(jmx):
+    tree = ET.parse(jmx)
+    root = tree.getroot()
+    #Check 10 - Listeners Enable or Disable
+    #Find ResultCollector node(s) in the XML
+    for tnode in root.iter('ThreadGroup'):
+        for node in root.iter('ResultCollector'):
+            if str.__contains__(str(node.attrib),'true'):
+                print(node.attrib)
+
+    return 
+'''

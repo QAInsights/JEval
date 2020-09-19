@@ -4,11 +4,11 @@ def parseJMX(jmx):
     printArt()
     findJMeterVersion(jmx)
     findThreadGroups(jmx)
-    validateListeners(jmx)
+    elementCheck(jmx)
     return
 
 def printArt():
-    print("""\
+    print("""
 
 ***************************************************************
 *                _   ______                   _               *
@@ -20,6 +20,6 @@ def printArt():
 *                                                             *   
 *       v0.0.1 - (c) NaveenKumar Namachivayam 2020            *  
 *                    QAInsights.com                           *
-*                    ~~~~~~~~~~~~~~                           *  
+*                                                             *  
 ***************************************************************
   """)
