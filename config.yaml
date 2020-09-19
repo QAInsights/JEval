@@ -1,3 +1,4 @@
+#Do not change the format of this yaml. However you can add/remove the JMeter > Elements list.
 JMeter:
   Elements:
   - ResultCollector

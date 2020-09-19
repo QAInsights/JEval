@@ -5,6 +5,7 @@ import sys
 import fileinput
 import pdb
 import yaml
+import logging
 
 from colorit import *
 
@@ -23,6 +24,7 @@ def elementCheck(jmx):
                 findElementStatus(jmx,element)
         except yaml.YAMLError as e:
             print(e)
+            printRed(e)
     return
 
 def findElementStatus(jmx, element):
@@ -55,19 +57,25 @@ def findElementStatus(jmx, element):
         if element == 'ResultCollector':
             message = f"{enabledCount} Listener(s) enabled."
             printRed(message)
+            recommendation = "Consider disabling Listeners."
+            addRecommendation(recommendation)
         elif element == 'ResponseAssertion':
             message = f"{enabledCount} Response Assertion(s) are enabled."
             printRed(message)
+            recommendation = "Consider disabling Response Assertions."
+            addRecommendation(recommendation)
         elif element == 'DebugSampler':
             message = f"{enabledCount} Debug Sampler(s) are enabled."
             printRed(message)
+            recommendation = "Consider disabling Debug Samplers."
+            addRecommendation(recommendation)
         else:
             printGreen(message)
     if flag == 0:
         # Exception 
         if element == 'ResultCollector':
             message = f"{enabledCount} Listener(s) are enabled."
-            printGreen(message)
+            printGreen(message)            
         elif element == 'ResponseAssertion':
             message = f"{enabledCount} Response Assertion(s) are enabled."
             printGreen(message)
@@ -104,7 +112,6 @@ def findThreadGroups(jmx):
             #Set flag for success
             flag=1
             message=f"Total number of Thread Groups enabled {enabledCount}"
-
         else:
             message="No thread groups enabled."
             #Set flag for fail
@@ -113,6 +120,8 @@ def findThreadGroups(jmx):
         printGreen(message)
     if flag == 0:
         printRed(message)    
+        recommendation = "Consider enabling one or more Thread Groups."
+        addRecommendation(recommendation)
     return
 
 def findJMeterVersion(jmx):
@@ -154,6 +163,9 @@ def printGreen(message):
     This function will print if the JMeter test plan passes a check.
     '''
     print(color(f"\u2713 {message}", Colors.green))
+    logging.basicConfig(filename='tmp.log',format='%(levelname)s %(asctime)s :: %(message)s',level=logging.DEBUG)
+    logging.info(f"{message}")
+
     return
 
 def printRed(message):
@@ -161,13 +173,17 @@ def printRed(message):
     This function will print if the JMeter test plan fails a check.
     '''
     print(color(f"\u2718 {message}", Colors.red))
+    logging.basicConfig(filename='tmp.log',format='%(levelname)s %(asctime)s :: %(message)s',level=logging.DEBUG)
+    logging.info(f"{message}")
     return
 
 def addRecommendation(recommendation):
     '''
     This functions adds the recommendation.
     '''
-    print(f"Recommendation: {recommendation}\n")    
+    print(f"Recommendation: {recommendation}")   
+    logging.basicConfig(filename='tmp.log',format='%(levelname)s %(asctime)s :: %(message)s',level=logging.DEBUG)
+    logging.info(f"{recommendation}") 
     return
 
 def validateTestPlan(jmx):
@@ -175,9 +191,18 @@ def validateTestPlan(jmx):
     This function validates the JMeter test plan.
     '''
     try:
-        print(XD.parse(jmx))
+        message="Valid JMeter Test Plan"
+        printGreen(message)
+
     except:
-        printRed("Invalid test plan. Please use the valid JMeter test plan. \n")
-        exit(1)
-    
+        message="Invalid test plan. Please use the valid JMeter test plan. \n"
+        printRed(message)
+        exit(1)    
+    return
+
+def generateReport():
+    '''
+    This function generate a report and store it in the present working directory.
+    '''
+
     return

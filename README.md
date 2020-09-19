@@ -14,3 +14,12 @@
 *                                                             *
 ***************************************************************
 </pre>
+
+# About JEval
+
+JEval helps you to evaluate your JMeter test plan and provides recommendation before you start your performance testing.
+
+# How to use?
+
+*placeholder*
+

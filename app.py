@@ -1,5 +1,6 @@
 from jmx import *
-
+from engine import printRed
+from engine import printGreen
 def main():
     try:
         #jmxFile = str(sys.argv)
@@ -13,7 +14,7 @@ def main():
             parseJMX(jmx)
         f.close()       
     except FileNotFoundError:
-        print("File Not Found")
-        
+        printRed("Trouble in accessing JMeter file. Check for missing file and/or its permissions.")
+
 if __name__ == "__main__":
     main()

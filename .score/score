@@ -1,8 +1,7 @@
 Display
 - File name x
 - JMeter version x
-- Validate JMeter file 
-- Count of each element type
+- Validate JMeter file x
 
 Score evaluation
 - Disabled Listeners + x
@@ -13,3 +12,6 @@ Score evaluation
 - Cache + x
 - HTTP Request Defaults + x
 - Latest version + x
+
+Features
+- Write report
