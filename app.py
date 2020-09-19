@@ -5,14 +5,15 @@ def main():
         #jmxFile = str(sys.argv)
         #print(str(sys.argv[1]))
         #print(f"JMeter file is {jmxFile}")
-        # Open file
+        
+        # Open file        
         jmx = "./jmx/Sample.jmx"
+        #Print file name
         with open(jmx,'r') as f:
             parseJMX(jmx)
-        f.close()
-       
+        f.close()       
     except FileNotFoundError:
         print("File Not Found")
-
+        
 if __name__ == "__main__":
     main()

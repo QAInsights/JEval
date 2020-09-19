@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import xml.dom.minidom as XD
 import argparse
 import sys
 import fileinput
@@ -120,7 +121,7 @@ def findJMeterVersion(jmx):
     '''
     tree = ET.parse(jmx)
     # Get JMeter version
-    root = tree.getroot()
+    root = tree.getroot()    
     jmeterversion = root.items()
     #Call JMeter Version
     expectedJMeterVersion = getJMeterVersion()
@@ -167,4 +168,16 @@ def addRecommendation(recommendation):
     This functions adds the recommendation.
     '''
     print(f"Recommendation: {recommendation}\n")    
+    return
+
+def validateTestPlan(jmx):
+    '''
+    This function validates the JMeter test plan.
+    '''
+    try:
+        print(XD.parse(jmx))
+    except:
+        printRed("Invalid test plan. Please use the valid JMeter test plan. \n")
+        exit(1)
+    
     return

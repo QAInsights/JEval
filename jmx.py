@@ -1,7 +1,10 @@
 from engine import *
+from colorit import *
 
 def parseJMX(jmx):
     printArt()
+    printFileName(jmx)
+    validateTestPlan(jmx)
     findJMeterVersion(jmx)
     findThreadGroups(jmx)
     elementCheck(jmx)
@@ -23,3 +26,7 @@ def printArt():
 *                                                             *  
 ***************************************************************
   """)
+
+def printFileName(jmx):
+    print(f"\033[93m \nAnalyzing {jmx} \n")    
+    return

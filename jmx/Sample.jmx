@@ -318,6 +318,4 @@
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-    </hashTree>
-  </hashTree>
-</jmeterTestPlan>
+ 
