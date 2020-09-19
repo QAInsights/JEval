@@ -1,4 +1,5 @@
-Elements:
+JMeter:
+  Elements:
   - ResultCollector
   - ResponseAssertion
   - TransactionController
@@ -11,3 +12,5 @@ Elements:
   - UniformRandomTimer
   - GaussianRandomTimer
   - DebugSampler
+  - Arguments
+  version: "5.3"

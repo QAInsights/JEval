@@ -1,4 +1,3 @@
-JMETER_VERSION="5.3"
 import xml.etree.ElementTree as ET
 import argparse
 import sys
@@ -9,27 +8,32 @@ import yaml
 from colorit import *
 
 def elementCheck(jmx):
-    with open('./elementCheck.yaml','r') as file:
+    '''
+    This function will check for each element in JMeter.
+    Returns: Each Elements status
+    '''
+    with open('./config.yaml','r') as file:
         try:
+            #Reading Config file
             elements=yaml.safe_load(file)
-            for i, k in elements.items():
-                #print(i, k)
-                for element in k:
-                    #print(element)
-                    findElementStatus(jmx,element)
-
+            #Looping JMeter > Elements
+            for element in elements['JMeter']['Elements']:
+                #Calling Elements Check
+                findElementStatus(jmx,element)
         except yaml.YAMLError as e:
             print(e)
     return
 
 def findElementStatus(jmx, element):
+    '''
+    This function will get called from elementCheck().
+    Returns each element status.
+    '''    
     tree = ET.parse(jmx)
     root = tree.getroot()
-    #print(str(countNode(root,element)))
     enabledCount = 0
     flag = 0
     message=f"No element found for {element}"
-
     for node in root.iter(element):
         if node.attrib is None:
             printRed(message)
@@ -46,7 +50,7 @@ def findElementStatus(jmx, element):
                 flag=0
     
     if flag == 1:
-        # Exception for ResultCollector
+        # Exceptions 
         if element == 'ResultCollector':
             message = f"{enabledCount} Listener(s) enabled."
             printRed(message)
@@ -59,7 +63,7 @@ def findElementStatus(jmx, element):
         else:
             printGreen(message)
     if flag == 0:
-        # Exception for ResultCollector
+        # Exception 
         if element == 'ResultCollector':
             message = f"{enabledCount} Listener(s) are enabled."
             printGreen(message)
@@ -71,27 +75,29 @@ def findElementStatus(jmx, element):
             printGreen(message)
         else:
             printRed(message)
-
     return
 
 def countNode(root,element):
+    '''
+    This function returns the count of the node.
+    '''
     count = 0
     for node in root.iter(element):
         count += 1
-
     return count
 
 def findThreadGroups(jmx):
+    '''
+    This function find the number of thread groups.
+    '''
     tree = ET.parse(jmx)
     root = tree.getroot()
     element = 'ThreadGroup'
-    #print(str(countNode(root,element)))
     enabledCount = 0
 
     for node in root.iter(element):
         #Find Enabled Thread Group
         if str.__contains__(str(node.attrib),'\'enabled\': \'true\''):            
-            #print(node.attrib)
             #Find enabled count
             enabledCount += 1
             #Set flag for success
@@ -105,17 +111,21 @@ def findThreadGroups(jmx):
     if flag == 1:
         printGreen(message)
     if flag == 0:
-        printRed(message)
-    
+        printRed(message)    
     return
 
 def findJMeterVersion(jmx):
+    '''
+    This function find the JMeter version.
+    '''
     tree = ET.parse(jmx)
     # Get JMeter version
     root = tree.getroot()
     jmeterversion = root.items()
-    #Check 00 - JMeter Version
-    if JMETER_VERSION == jmeterversion[2][1]:
+    #Call JMeter Version
+    expectedJMeterVersion = getJMeterVersion()
+    #Check JMeter Version
+    if expectedJMeterVersion == jmeterversion[2][1]:
         message=f"JMeter version is {jmeterversion[2][1]}."
         printGreen(message)
     else:
@@ -124,6 +134,19 @@ def findJMeterVersion(jmx):
         recommendation = "Consider updating to the latest version of JMeter."
         addRecommendation(recommendation)
     return
+
+def getJMeterVersion():
+    '''
+    This function reads the expected JMeter version from the config file.
+    '''
+    #Read Config yaml
+    with open('./config.yaml','r') as file:
+        try:
+            elements=yaml.safe_load(file)            
+        except yaml.YAMLError as e:
+            print(e)
+    #Return JMeter Version
+    return str(elements['JMeter']['version'])
 
 def printGreen(message):
     '''
@@ -140,19 +163,8 @@ def printRed(message):
     return
 
 def addRecommendation(recommendation):
+    '''
+    This functions adds the recommendation.
+    '''
     print(f"Recommendation: {recommendation}\n")    
     return
-
-'''
-def validateListeners(jmx):
-    tree = ET.parse(jmx)
-    root = tree.getroot()
-    #Check 10 - Listeners Enable or Disable
-    #Find ResultCollector node(s) in the XML
-    for tnode in root.iter('ThreadGroup'):
-        for node in root.iter('ResultCollector'):
-            if str.__contains__(str(node.attrib),'true'):
-                print(node.attrib)
-
-    return 
-'''

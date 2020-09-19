@@ -1,15 +1,15 @@
 Display
-- File name
-- JMeter version
-- Validate JMeter file
+- File name 
+- JMeter version x
+- Validate JMeter file 
 - Count of each element type
 
 Score evaluation
-- Disabled Listeners +
-- CSV Data Set Config +
+- Disabled Listeners + x
+- CSV Data Set Config + x
 - User Parameters +
-- Transaction Controllers +
-- Cookies +
-- Cache +
-- HTTP Request Defaults +
-- Latest version +
+- Transaction Controllers + x
+- Cookies + x
+- Cache + x
+- HTTP Request Defaults + x
+- Latest version + x
