@@ -30,7 +30,7 @@ def printArt():
   """)
 
 def printFileName(jmx):
-    print(f"\033[93m \nAnalyzing {jmx} \n")    
+    print(f"\033[93m \n\t Analyzing {jmx} \n")    
     return
 
 def cleanup():

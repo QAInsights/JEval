@@ -1,8 +1,8 @@
 import argparse
+import time
 from jmx import *
 from engine import printRed
 from engine import printGreen
-
 
 def main():
     try:
@@ -18,4 +18,6 @@ def main():
         printRed("Trouble in accessing JMeter test plan. Check for missing file and/or its permissions.")
 
 if __name__ == "__main__":
+    start_time = time.time()
     main()
+    print("\033[93m \n\t Evaluation completed in  %s seconds. \n" % (time.time() - start_time))

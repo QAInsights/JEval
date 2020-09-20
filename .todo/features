@@ -2,6 +2,7 @@ Display
 - File name x
 - JMeter version x
 - Validate JMeter file x
+- Display total generation time
 
 Score evaluation
 - Disabled Listeners + x
