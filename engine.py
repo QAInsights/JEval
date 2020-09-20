@@ -191,6 +191,7 @@ def validateTestPlan(jmx):
     This function validates the JMeter test plan.
     '''
     try:
+        element=XD.parse(jmx)
         message="Valid JMeter Test Plan"
         printGreen(message)
 
