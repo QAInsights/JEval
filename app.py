@@ -15,9 +15,9 @@ def main():
             parseJMX(jmx)
         f.close()       
     except FileNotFoundError:
-        printRed("Trouble in accessing JMeter test plan. Check for missing file and/or its permissions.")
+        printRed("Trouble in accessing file. Possible causes: Invalid test plan, missing file and/or its permissions.")
 
 if __name__ == "__main__":
     start_time = time.time()
     main()
-    print("\033[93m \n\t Evaluation completed in  %s seconds. \n" % (time.time() - start_time))
+    print("\033[93m \n\t Execution completed in %s seconds. \n" % (time.time() - start_time))
