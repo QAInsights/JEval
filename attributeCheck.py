@@ -10,18 +10,28 @@ def attributeCheck(jmx, element):
     #Set flag = 1 for issue found
     flag = 1
     for node in root.iter(element):
-        if element == 'IfController':
-            for child in node.getchildren():
-                #print(child.attrib)
-                for i, j in child.attrib.items():
-                    #print(i, j)                    
-                    if str(j) == 'IfController.useExpression':
-                        #Set flag = 0 for no issues
+        #
+        for child in node.getchildren():            
+            for i, j in child.attrib.items():
+                #print(i, j)
+                if str(j) == 'IfController.useExpression':
+                    #Set flag = 0 for no issues
+                    flag=0
+                elif str(j) == 'LoopController.loops':
+                    loopCount = child.text
+                    if int(loopCount) == -1:
+                        #print(f'Loop count {loopCount}')
                         flag=0
-                    else:
-                        flag=1
+                else:
+                    flag=1
+        #if element == "LoopController":
+            #print("Loopppp")
     if flag == 1:
-        message="For performance, check \"Interpret Condition as Variable Expression\" in If Controller."
-        addRecommendation(message)       
+        if element == 'IfController':
+            message="For performance, check \"Interpret Condition as Variable Expression\" in If Controller."
+            addRecommendation(message)
+        elif element == 'LoopController':
+            message="Loop Count is set to infinity. Double check the count before you start the test."
+            addRecommendation(message)
                         
     return

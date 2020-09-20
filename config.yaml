@@ -19,4 +19,5 @@ JMeter:
   - BeanShellSampler
   - JSR223Sampler
   - IfController
+  - LoopController
   version: "5.3" #Update the latest version of JMeter

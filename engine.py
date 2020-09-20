@@ -23,7 +23,7 @@ def elementCheck(jmx):
             for element in elements['JMeter']['Elements']:
                 #Calling Elements Check
                 findElementStatus(jmx,element)
-                if element == "IfController":
+                if element == "IfController" or element == "LoopController":
                     attributeCheck(jmx,element)
         except yaml.YAMLError as e:
             #print(e)
