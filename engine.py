@@ -6,8 +6,9 @@ import fileinput
 import pdb
 import yaml
 import logging
-
+from attributeCheck import *
 from colorit import *
+from display import *
 
 def elementCheck(jmx):
     '''
@@ -22,8 +23,10 @@ def elementCheck(jmx):
             for element in elements['JMeter']['Elements']:
                 #Calling Elements Check
                 findElementStatus(jmx,element)
+                if element == "IfController":
+                    attributeCheck(jmx,element)
         except yaml.YAMLError as e:
-            print(e)
+            #print(e)
             printRed(e)
     return
 
@@ -69,6 +72,16 @@ def findElementStatus(jmx, element):
             printRed(message)
             recommendation = "Consider disabling Debug Samplers."
             addRecommendation(recommendation)
+        elif element == 'ProxyControl':
+            message = f"{enabledCount} HTTP(S) Script Recorder(s) are enabled."
+            printRed(message)
+            recommendation = "Consider disabling HTTP(S) Script Recorder(s)."
+            addRecommendation(recommendation)
+        elif element == 'BeanShellSampler':
+            message = f"{enabledCount} Bean Shell Sampler(s) are enabled."
+            printRed(message)
+            recommendation = "Consider using JSR223 Sampler."
+            addRecommendation(recommendation)
         else:
             printGreen(message)
     if flag == 0:
@@ -81,6 +94,12 @@ def findElementStatus(jmx, element):
             printGreen(message)
         elif element == 'DebugSampler':
             message = f"{enabledCount} Debug Sampler(s) are enabled."
+            printGreen(message)
+        elif element == 'ProxyControl':
+            message = f"{enabledCount} HTTP(S) Script Recorder(s) are enabled."
+            printGreen(message)
+        elif element == 'BeanShellSampler':
+            message = f"{enabledCount} Bean Shell Sampler(s) are enabled."
             printGreen(message)
         else:
             printRed(message)
@@ -158,33 +177,7 @@ def getJMeterVersion():
     #Return JMeter Version
     return str(elements['JMeter']['version'])
 
-def printGreen(message):
-    '''
-    This function will print if the JMeter test plan passes a check.
-    '''
-    print(color(f"\u2713 {message}", Colors.green))
-    logging.basicConfig(filename='tmp.log',format='%(levelname)s %(asctime)s :: %(message)s',level=logging.DEBUG)
-    logging.info(f"{message}")
 
-    return
-
-def printRed(message):
-    '''
-    This function will print if the JMeter test plan fails a check.
-    '''
-    print(color(f"\u2718 {message}", Colors.red))
-    logging.basicConfig(filename='tmp.log',format='%(levelname)s %(asctime)s :: %(message)s',level=logging.DEBUG)
-    logging.info(f"{message}")
-    return
-
-def addRecommendation(recommendation):
-    '''
-    This functions adds the recommendation.
-    '''
-    print(f"Recommendation: {recommendation}")   
-    logging.basicConfig(filename='tmp.log',format='%(levelname)s %(asctime)s :: %(message)s',level=logging.DEBUG)
-    logging.info(f"{recommendation}") 
-    return
 
 def validateTestPlan(jmx):
     '''
@@ -199,11 +192,4 @@ def validateTestPlan(jmx):
         message="Invalid test plan. Please use the valid JMeter test plan. \n"
         printRed(message)
         exit(1)    
-    return
-
-def generateReport():
-    '''
-    This function generate a report and store it in the present working directory.
-    '''
-
     return

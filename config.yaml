@@ -4,6 +4,7 @@ JMeter:
   - ResultCollector
   - ResponseAssertion
   - TransactionController
+  - AuthManager
   - CookieManager
   - HeaderManager
   - CacheManager
@@ -14,4 +15,8 @@ JMeter:
   - GaussianRandomTimer
   - DebugSampler
   - Arguments
+  - ProxyControl
+  - BeanShellSampler
+  - JSR223Sampler
+  - IfController
   version: "5.3" #Update the latest version of JMeter
