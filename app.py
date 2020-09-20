@@ -1,6 +1,7 @@
 import argparse
 import time
-from jmx import *
+import os
+from jmx import parseJMX
 from engine import printRed
 from engine import printGreen
 
@@ -20,4 +21,7 @@ def main():
 if __name__ == "__main__":
     start_time = time.time()
     main()
-    print("\033[93m \n\t Execution completed in %s seconds. \n" % (time.time() - start_time))
+    #Print Execution Time
+    print("\033[93m \n\t Execution completed in %s seconds." % (time.time() - start_time))
+    #Print Log file location
+    print(f"\033[93m \t Log file is located in {os.curdir}/tmp.log")    
