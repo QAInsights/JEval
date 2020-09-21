@@ -22,6 +22,6 @@ if __name__ == "__main__":
     start_time = time.time()
     main()
     #Print Execution Time
-    print("\033[93m \n\t Execution completed in %s seconds." % (time.time() - start_time))
+    print("\033[93m \n\t Execution completed in %s seconds." % round(time.time() - start_time,3))
     #Print Log file location
     print(f"\033[93m \t Log file is located in {os.curdir}/tmp.log")    
