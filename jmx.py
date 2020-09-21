@@ -3,6 +3,7 @@ from engine import *
 from colorit import *
 
 def parseJMX(jmx):
+    #Calling the functions
     cleanup()
     printArt()
     printFileName(jmx)
