@@ -31,7 +31,7 @@ JEval helps you to evaluate your JMeter test plan and provides recommendation be
 `pip install -r requirements.txt`
 
 **Important Notes**  
-* *JEval doesn't make any modifications to your JMeter test plan. But it is advisable to make a backup of your JMeter test plan.*
+* *JEval doesn't make any modifications to your JMeter test plan. But it is advisable to make a backup of your JMeter test plan.*  
 * *JEval utility doesn't collect any sort of data*
 
 # ✨ Usage

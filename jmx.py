@@ -14,7 +14,7 @@ def parseJMX(jmx):
 
 def printArt():
     print("""
-\033[93m 
+\033[94m 
 ***************************************************************
 *                _   ______                   _               *
 *               | | |  ____|                 | |              * 
@@ -27,10 +27,12 @@ def printArt():
 *                    QAInsights.com                           *
 *                                                             *  
 ***************************************************************
+JEval helps you to evaluate your JMeter test plan and provides recommendation 
+before you start your performance testing.
   """)
 
 def printFileName(jmx):
-    print(f"\033[93m \n\t Analyzing {jmx} \n")    
+    print(f"\033[93m \t Analyzing {jmx} \n")    
     return
 
 def cleanup():
