@@ -38,7 +38,9 @@ JEval helps you to evaluate your JMeter test plan and provides recommendation be
 
 * cd into the repository
 * Issue the below command  
-`python app.py -f <JMeter-File-Path>  
+`python app.py -f <JMeter-File-Path>`  
+E.g.  
+`python app.py -f .\jmx\Sample.jmx`
 
 ## 💪 Output
 
