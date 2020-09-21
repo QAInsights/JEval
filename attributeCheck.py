@@ -8,7 +8,7 @@ def attributeCheck(jmx, element):
     tree = ET.parse(jmx)
     root = tree.getroot()
     #Set flag = 1 for issue found
-    flag = 1
+    flag = 0
     for node in root.iter(element):
         #
         for child in node.getchildren():            

@@ -39,9 +39,17 @@ def findElementStatus(jmx, element):
     root = tree.getroot()
     enabledCount = 0
     flag = 0
-    message=f"No element found for {element}"
+    message=f"No element found for {element}."
+    '''
+    #Elements to ignore if not found in the JMX Test Plan
+    if element == 'XPath2Assertion' or element == 'JSONPathAssertion':
+        message=f"Check ignored for {element}."
+        printGreen(message)
+    '''
     for node in root.iter(element):
-        if node.attrib is None:
+        #print(node.attrib)
+        #print(element)
+        if node.attrib is None:            
             printRed(message)
         else:
             if str.__contains__(str(node.attrib),'\'enabled\': \'true\''):            
@@ -61,11 +69,16 @@ def findElementStatus(jmx, element):
             message = f"{enabledCount} Listener(s) enabled."
             printRed(message)
             recommendation = "Consider disabling Listeners."
-            addRecommendation(recommendation)
+            addRecommendation(recommendation)        
         elif element == 'ResponseAssertion':
             message = f"{enabledCount} Response Assertion(s) are enabled."
             printRed(message)
             recommendation = "Consider disabling Response Assertions."
+            addRecommendation(recommendation)
+        elif element == 'JSONPathAssertion':
+            message = f"{enabledCount} JSON Path Assertion(s) are enabled."
+            printRed(message)
+            recommendation = "Consider disabling JSON Path Assertions."
             addRecommendation(recommendation)
         elif element == 'DebugSampler':
             message = f"{enabledCount} Debug Sampler(s) are enabled."
@@ -81,7 +94,7 @@ def findElementStatus(jmx, element):
             message = f"{enabledCount} Bean Shell Sampler(s) are enabled."
             printRed(message)
             recommendation = "Consider using JSR223 Sampler."
-            addRecommendation(recommendation)
+            addRecommendation(recommendation)        
         else:
             printGreen(message)
     if flag == 0:
@@ -92,17 +105,59 @@ def findElementStatus(jmx, element):
         elif element == 'ResponseAssertion':
             message = f"{enabledCount} Response Assertion(s) are enabled."
             printGreen(message)
+        elif element == 'JSONPathAssertion':
+            message = f"{enabledCount} JSON Path Assertion(s) are enabled."
+            printGreen(message)
         elif element == 'DebugSampler':
             message = f"{enabledCount} Debug Sampler(s) are enabled."
             printGreen(message)
         elif element == 'ProxyControl':
             message = f"{enabledCount} HTTP(S) Script Recorder(s) are enabled."
             printGreen(message)
+        elif element == 'CookieManager':
+            message = f"{enabledCount} CookieManager added."
+            printRed(message)
+            recommendation = "Consider adding CookieManager."
+            addRecommendation(recommendation)
+        elif element == 'CacheManager':
+            message = f"{enabledCount} Cache Manager added."
+            printRed(message)
+            recommendation = "Consider adding Cache Manager."
+            addRecommendation(recommendation)
+        elif element == 'ConfigTestElement':
+            message = f"{enabledCount} HTTP Request Defaults added."
+            printRed(message)
+            recommendation = "Consider adding HTTP Request Defaults."
+            addRecommendation(recommendation)
+        elif element == 'CSVDataSet':
+            message = f"{enabledCount} CSV Data Set are added."
+            printGreen(message)
+            recommendation = "Consider adding CSV Data Set."
+            addRecommendation(recommendation)
+        elif element == 'ConstantTimer':
+            message = f"{enabledCount} Timers added."
+            printRed(message)
+            recommendation = "Consider adding Timers."
+            addRecommendation(recommendation)
         elif element == 'BeanShellSampler':
             message = f"{enabledCount} Bean Shell Sampler(s) are enabled."
             printGreen(message)
-        else:
+            recommendation = "Consider using JSR223 Sampler."
+            addRecommendation(recommendation)
+        elif element == 'HeaderManager':
+            message = f"{enabledCount} Header Manager are enabled."
             printRed(message)
+            recommendation = "Consider adding Header Manager."
+            addRecommendation(recommendation)
+        elif element == 'TestAction':
+            message = f"{enabledCount} Test Action are enabled."
+            printRed(message)
+            recommendation = "Consider adding Test Action."
+            addRecommendation(recommendation)
+        else:
+            #printRed(message)
+            pass
+    
     return
 
 def countNode(root,element):
