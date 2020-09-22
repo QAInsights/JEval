@@ -173,31 +173,50 @@ def findThreadGroups(jmx):
     '''
     This function find the number of thread groups.
     '''
-    tree = ET.parse(jmx)
-    root = tree.getroot()
-    element = 'ThreadGroup'
-    enabledCount = 0
-
-    for node in root.iter(element):
-        #Find Enabled Thread Group
-        if str.__contains__(str(node.attrib),'\'enabled\': \'true\''):            
-            #Find enabled count
-            enabledCount += 1
-            #Set flag for success
-            flag=1
-            message=f"Total number of Thread Groups enabled {enabledCount}"
-        else:
-            message="No thread groups enabled."
-            #Set flag for fail
-            flag=0
-    if flag == 1:
-        printGreen(message)
-    if flag == 0:
-        printRed(message)    
-        recommendation = "Consider enabling one or more Thread Groups."
-        addRecommendation(recommendation)
+    with open('./config.yaml','r') as file:
+        try:
+            #Reading Config file
+            elements=yaml.safe_load(file)
+            #Looping JMeter > Thread Group
+            for element in elements['JMeter']['ThreadGroups']:
+                #print((element))
+                findThreadGroupStatus(jmx,element)                
+        except yaml.YAMLError as e:
+            printRed(e)    
     return
 
+def findThreadGroupStatus(jmx,element):
+    tree = ET.parse(jmx)
+    root = tree.getroot()
+    #element = 'ThreadGroup'
+    enabledCount = 0
+    flag = 0
+    message=f"No element found for {element}."
+    for node in root.iter(element):
+                    #print(f"hhh {node.attrib}")
+        if node.attrib:
+            #Find Enabled Thread Groups
+            if str.__contains__(str(node.attrib),'\'enabled\': \'true\''):            
+                #Find enabled count
+                enabledCount += 1
+                #Set flag for success
+                flag=1
+                message=f"Total number of {element} enabled {enabledCount}"
+            elif str.__contains__(str(node.attrib),'\'enabled\': \'false\''):
+                message=f"No {element} enabled."
+                #Set flag for fail
+                flag=0
+        else:
+            printRed(f"No {element} found.")
+    if flag == 1:
+        printGreen(message)
+        enabledCount = 0                
+    if flag == 0:
+        printRed(message)
+        recommendation = f"Consider enabling one or more {element}."
+        addRecommendation(recommendation)   
+        enabledCount = 0     
+    return
 def findJMeterVersion(jmx):
     '''
     This function find the JMeter version.

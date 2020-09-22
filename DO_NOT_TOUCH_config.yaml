@@ -1,4 +1,5 @@
-#Do not change the format of this yaml. However you can add/remove the JMeter > Elements list.
+#Do not change the format of this yaml. This is just a back up of the `config.yaml`.
+#In case if you misconfigured, you can copy the below structure and paste it in the `config.yaml`.
 JMeter:
   Elements:
   - AuthManager

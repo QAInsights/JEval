@@ -1,15 +1,18 @@
-Display
-- File name x
-- JMeter version x
-- Validate JMeter file x
-- Display total generation time x
-
-Score evaluation
-- Disabled Listeners + x
-- CSV Data Set Config + x
-- User Parameters +
-- Transaction Controllers + x
-- Cookies + x
-- Cache + x
-- HTTP Request Defaults + x
-- Latest version + x
+Categories - vanilla JMeter
+- Thread Group
+    Thread Group (TG)
+    Setup TG
+    Tear-down TG
+- Config Element
+- Samplers
+    HTTP(S)
+    Debug Sampler
+- Preprocessors
+- Post Preprocessors
+- Timers
+    Constant
+    Gaussian
+- Listeners
+    View Results Tree    
+    Summary Report
+    Aggregate Report

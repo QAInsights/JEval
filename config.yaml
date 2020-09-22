@@ -1,5 +1,9 @@
 #Do not change the format of this yaml. However you can add/remove the JMeter > Elements list.
 JMeter:
+  ThreadGroups:
+  - ThreadGroup
+  - SetupThreadGroup
+  - PostThreadGroup
   Elements:
   - AuthManager
   - CookieManager
