@@ -186,14 +186,16 @@ def findThreadGroups(jmx):
     return
 
 def findThreadGroupStatus(jmx,element):
+    '''
+    This function detects Thread Group and types. It will read from the config.yaml for the
+    list of Thread Groups.
+    '''
     tree = ET.parse(jmx)
     root = tree.getroot()
-    #element = 'ThreadGroup'
     enabledCount = 0
     flag = 0
     message=f"No element found for {element}."
-    for node in root.iter(element):
-                    #print(f"hhh {node.attrib}")
+    for node in root.iter(element):                    
         if node.attrib:
             #Find Enabled Thread Groups
             if str.__contains__(str(node.attrib),'\'enabled\': \'true\''):            
