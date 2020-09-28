@@ -64,7 +64,7 @@ def findElementStatus(jmx, element):
                 flag=0
     
     if flag == 1:
-        # Exceptions 
+        # Exceptions
         if element == 'ResultCollector':
             message = f"{enabledCount} Listener(s) enabled."
             printRed(message)
