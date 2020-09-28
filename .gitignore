@@ -130,3 +130,6 @@ dmypy.json
 
 # Vscode
 .vscode
+
+# App related output
+tmp.log

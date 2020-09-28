@@ -1,4 +1,5 @@
-#Do not change the format of this yaml. However you can add/remove the JMeter > Elements list.
+# For a sample of this file; please refer to the file on the master branch of the repository
+# Beware: Do not change the format of this yaml. However you can add/remove the JMeter > Elements list.
 JMeter:
   ThreadGroups:
   - ThreadGroup
