@@ -136,3 +136,6 @@ dmypy.json
 
 # App related output
 tmp.log
+
+# Misc
+Scripts/
