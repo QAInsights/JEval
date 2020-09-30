@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "QAInsights",
+      "name": "NaveenKumar",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2826376?v=4",
+      "profile": "https://QAInsights.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "JEval",
+  "projectOwner": "QAInsights",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
