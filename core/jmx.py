@@ -1,19 +1,27 @@
-import os
-from engine import *
-from colorit import *
+from core.engine import *
 
-def parseJMX(jmx):
-    #Calling the functions
+
+def parse_jmx(jmx):
+    """
+    Parses a JMX file
+    @param jmx: path to JMX file
+    """
+    # boilerplate
     cleanup()
-    printArt()
-    printFileName(jmx)
-    validateTestPlan(jmx)
-    findJMeterVersion(jmx)
-    findThreadGroups(jmx)
-    elementCheck(jmx)
-    return
+    print_art()
+    print_file_name(jmx)
 
-def printArt():
+    # jmx related computing
+    tree = validate_test_plan(jmx)
+    validate_jmeter_version(tree)
+    find_thread_groups(tree)
+    element_check(tree)
+
+
+def print_art():
+    """
+    Prints the console header of the app
+    """
     print("""
 \033[94m 
 ***************************************************************
@@ -32,13 +40,20 @@ JEval helps you to evaluate your JMeter test plan and provides recommendation
 before you start your performance testing.
   """)
 
-def printFileName(jmx):
-    print(f"\033[93m \t Analyzing {jmx} \n")    
-    return
+
+def print_file_name(jmx):
+    """
+    Prints (in yellow) the filename of the JMX being analyzed
+    @param jmx: path to JMX file
+    """
+    print(f"\033[93m \t Analyzing {jmx} \n")
+
 
 def cleanup():
+    """
+    Removes previous (or trailing) log files in the execution folder
+    """
     try:
         os.remove("tmp.log")
-    except:
+    except OSError:
         pass
-    return
