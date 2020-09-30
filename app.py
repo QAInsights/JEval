@@ -2,7 +2,7 @@ import argparse
 import os
 import time
 
-from core.engine import print_red
+from core.engine import print_message, Colors
 from core.jmx import parse_jmx
 
 
@@ -27,7 +27,8 @@ def main():
             parse_jmx(jmx)
             f.close()
     except FileNotFoundError as e:
-        print_red(message=f"An error occured during JEval execution: {e.strerror} ({e.filename})")
+        print_message(message_color=Colors.red, message=f"An error occured during JEval execution: "
+                                                        f"{e.strerror} ({e.filename})")
 
 
 if __name__ == "__main__":
