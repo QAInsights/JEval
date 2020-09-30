@@ -21,12 +21,9 @@ def attribute_check(tree, element):
                 elif str(j) == 'LoopController.loops':
                     loop_count = child.text
                     if int(loop_count) == -1:
-                        # print(f'Loop count {loop_count}')
                         flag = 0
                 else:
                     flag = 1
-        # if element == "LoopController":
-        # print("Loop")
     if flag == 1:
         if element == 'IfController':
             print_message(message_color=Colors.white, message="For performance, check \"Interpret Condition as Variable"
