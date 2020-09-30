@@ -35,12 +35,13 @@ def find_element_status(tree, element):
     enabled_count = 0
     flag = 0
     message = f"No element found for {element}."
-    """
-    #Elements to ignore if not found in the JMX Test Plan
-    if element == 'XPath2Assertion' or element == 'JSONPathAssertion':
-        message=f"Check ignored for {element}."
-        printGreen(message)
-    """
+
+    # Elements to ignore if not found in the JMX Test Plan
+    # if element == 'XPath2Assertion' or element == 'JSONPathAssertion':
+    #    message=f"Check ignored for {element}."
+    #    printGreen(message)
+    #
+
     for node in root.iter(element):
         if node.attrib is None:
             print_message(message_color=Colors.red, message=message)
@@ -100,7 +101,8 @@ def find_element_status(tree, element):
             print_message(message_color=Colors.green, message=f"{enabled_count} Debug Sampler(s) are enabled.")
 
         elif element == 'ProxyControl':
-            print_message(message_color=Colors.green, message=f"{enabled_count} HTTP(S) Script Recorder(s) are enabled.")
+            print_message(message_color=Colors.green,
+                          message=f"{enabled_count} HTTP(S) Script Recorder(s) are enabled.")
 
         elif element == 'CookieManager':
             print_message(message_color=Colors.green, message=f"{enabled_count} CookieManager added.")
