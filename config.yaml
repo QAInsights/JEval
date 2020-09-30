@@ -1,32 +1,37 @@
-# For a sample of this file; please refer to the file on the master branch of the repository
-# Beware: Do not change the format of this yaml. However you can add/remove the JMeter > Elements list.
+#Do not change the format of this yaml. However you can add/remove the JMeter > Elements list.
 JMeter:
   ThreadGroups:
   - ThreadGroup
   - SetupThreadGroup
   - PostThreadGroup
   Elements:
+  #NonTest Elements
+  - ProxyControl
+  #Logic Controllers
+  - TransactionController  
+  - IfController
+  - LoopController
+  #Config Elements
+  - ConfigTestElement
+  - Arguments
   - AuthManager
   - CookieManager
   - HeaderManager
   - CacheManager
-  - CSVDataSet  
-  - TransactionController  
-  - ConfigTestElement
+  - CSVDataSet
+  #Timers
   - ConstantTimer
   - UniformRandomTimer
   - GaussianRandomTimer
-  - Arguments
-  - ProxyControl
   - RegexExtractor
-  - TestAction
-  - BeanShellSampler
-  - JSR223Sampler
-  - IfController
-  - LoopController
+  #Listeners
   - ResultCollector
   - ResponseAssertion
   - XPath2Assertion
   - JSONPathAssertion
+  #Samplers
+  - TestAction  
   - DebugSampler
+  - JSR223Sampler
+  - BeanShellSampler
   version: "5.3" #Update the latest version of JMeter
