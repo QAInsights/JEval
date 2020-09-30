@@ -1,4 +1,7 @@
 # 🚀 JEval
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-1EAEDB)]()
 [![saythanks](https://img.shields.io/badge/say-thanks-1EAEDB.svg)](https://saythanks.io/to/catch.nkn%40gmail.com)
 [![](https://img.shields.io/badge/license-MIT-0a0a0a.svg?style=flat&colorA=1EAEDB)](https://qainsights.com)
@@ -87,3 +90,22 @@ If you want to add custom elements, you can add it in the `config.yaml` file.
 
 # 💰 Donate
 ☕ <a target="_blank" href="https://www.buymeacoffee.com/qainsights">Buy me a tea</a>
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://QAInsights.com"><img src="https://avatars2.githubusercontent.com/u/2826376?v=4" width="100px;" alt=""/><br /><sub><b>NaveenKumar</b></sub></a><br /><a href="https://github.com/QAInsights/JEval/commits?author=QAInsights" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
