@@ -1,10 +1,9 @@
-from xml.etree.ElementTree import parse
-from core.display import *
+from utils.display import print_message, Colors
 
 
 def attribute_check(tree, element):
     """
-    Performs additional attribute checks on a few elements
+    Performs additional attribute checks on IfController or LoopController
     @param tree: The parsed JMX
     @param element: The element to check
     """
@@ -22,16 +21,13 @@ def attribute_check(tree, element):
                 elif str(j) == 'LoopController.loops':
                     loop_count = child.text
                     if int(loop_count) == -1:
-                        # print(f'Loop count {loop_count}')
                         flag = 0
                 else:
                     flag = 1
-        # if element == "LoopController":
-        # print("Loop")
     if flag == 1:
         if element == 'IfController':
-            message = "For performance, check \"Interpret Condition as Variable Expression\" in If Controller."
-            add_recommendation(message)
+            print_message(message_color=Colors.white, message="For performance, check \"Interpret Condition as Variable"
+                                                              " Expression\" in If Controller.")
         elif element == 'LoopController':
-            message = "Loop Count is set to infinity. Double check the count before you start the test."
-            add_recommendation(message)
+            print_message(message_color=Colors.white, message="Loop Count is set to infinity. Double check "
+                                                              "the count before you start the test.")

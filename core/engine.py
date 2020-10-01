@@ -1,9 +1,9 @@
-from xml.dom.minidom import parse
+from xml.etree import ElementTree
 
 import yaml
 
 from core.attribute_check import *
-from core.display import *
+from utils.display import print_message, Colors
 
 
 def element_check(tree):
@@ -22,7 +22,7 @@ def element_check(tree):
                 if element == "IfController" or element == "LoopController":
                     attribute_check(tree, element)
         except yaml.YAMLError as e:
-            print_red(message=e)
+            print_message(message_color=Colors.red, message=e)
 
 
 def find_element_status(tree, element):
@@ -35,22 +35,23 @@ def find_element_status(tree, element):
     enabled_count = 0
     flag = 0
     message = f"No element found for {element}."
-    """
-    #Elements to ignore if not found in the JMX Test Plan
-    if element == 'XPath2Assertion' or element == 'JSONPathAssertion':
-        message=f"Check ignored for {element}."
-        printGreen(message)
-    """
+
+    # Elements to ignore if not found in the JMX Test Plan
+    # if element == 'XPath2Assertion' or element == 'JSONPathAssertion':
+    #    message=f"Check ignored for {element}."
+    #    printGreen(message)
+    #
+
     for node in root.iter(element):
         if node.attrib is None:
-            print_red(message=message)
+            print_message(message_color=Colors.red, message=message)
         else:
             if str.__contains__(str(node.attrib), '\'enabled\': \'true\''):
                 # Find enabled count
                 enabled_count += 1
                 # Set flag for success
                 flag = 1
-                message = "{enabled_count} {element}(s) enabled."
+                message = f"{enabled_count} {element}(s) enabled."
             else:
                 message = f"No {element} enabled."
                 # Set flag for fail
@@ -59,83 +60,83 @@ def find_element_status(tree, element):
     if flag == 1:
         # Exceptions
         if element == 'ResultCollector':
-            print_red(message=f"{enabled_count} Listener(s) enabled.")
-            add_recommendation(recommendation="Consider disabling Listeners.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} Listener(s) enabled.")
+            print_message(message_color=Colors.white, message="Consider disabling Listeners.")
 
         elif element == 'ResponseAssertion':
-            print_red(message=f"{enabled_count} Response Assertion(s) are enabled.")
-            add_recommendation(recommendation="Consider disabling Response Assertions.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} Response Assertion(s) are enabled.")
+            print_message(message_color=Colors.white, message="Consider disabling Response Assertions.")
 
         elif element == 'JSONPathAssertion':
-            print_red(message=f"{enabled_count} JSON Path Assertion(s) are enabled.")
-            add_recommendation(recommendation="Consider disabling JSON Path Assertions.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} JSON Path Assertion(s) are enabled.")
+            print_message(message_color=Colors.white, message="Consider disabling JSON Path Assertions.")
 
         elif element == 'DebugSampler':
-            print_red(message=f"{enabled_count} Debug Sampler(s) are enabled.")
-            add_recommendation(recommendation="Consider disabling Debug Samplers.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} Debug Sampler(s) are enabled.")
+            print_message(message_color=Colors.white, message="Consider disabling Debug Samplers.")
 
         elif element == 'ProxyControl':
-            print_red(message=f"{enabled_count} HTTP(S) Script Recorder(s) are enabled.")
-            add_recommendation(recommendation="Consider disabling HTTP(S) Script Recorder(s).")
+            print_message(message_color=Colors.red, message=f"{enabled_count} HTTP(S) Script Recorder(s) are enabled.")
+            print_message(message_color=Colors.white, message="Consider disabling HTTP(S) Script Recorder(s).")
 
         elif element == 'BeanShellSampler':
-            print_red(message=f"{enabled_count} Bean Shell Sampler(s) are enabled.")
-            add_recommendation(recommendation="Consider using JSR223 Sampler.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} Bean Shell Sampler(s) are enabled.")
+            print_message(message_color=Colors.white, message="Consider using JSR223 Sampler.")
 
         else:
-            print_green(message=message)
+            print_message(message_color=Colors.green, message=message)
 
     if flag == 0:
         # Exception
         if element == 'ResultCollector':
-            print_green(message=f"{enabled_count} Listener(s) are enabled.")
+            print_message(message_color=Colors.green, message=f"{enabled_count} Listener(s) are enabled.")
 
         elif element == 'ResponseAssertion':
-            print_green(message=f"{enabled_count} Response Assertion(s) are enabled.")
+            print_message(message_color=Colors.green, message=f"{enabled_count} Response Assertion(s) are enabled.")
 
         elif element == 'JSONPathAssertion':
-            print_green(message=f"{enabled_count} JSON Path Assertion(s) are enabled.")
+            print_message(message_color=Colors.green, message=f"{enabled_count} JSON Path Assertion(s) are enabled.")
 
         elif element == 'DebugSampler':
-            print_green(message=f"{enabled_count} Debug Sampler(s) are enabled.")
+            print_message(message_color=Colors.green, message=f"{enabled_count} Debug Sampler(s) are enabled.")
 
         elif element == 'ProxyControl':
-            print_green(message=f"{enabled_count} HTTP(S) Script Recorder(s) are enabled.")
+            print_message(message_color=Colors.green,
+                          message=f"{enabled_count} HTTP(S) Script Recorder(s) are enabled.")
 
         elif element == 'CookieManager':
-            print_red(message=f"{enabled_count} CookieManager added.")
-            add_recommendation(recommendation="Consider adding CookieManager.")
+            print_message(message_color=Colors.green, message=f"{enabled_count} CookieManager added.")
+            print_message(message_color=Colors.white, message="Consider adding CookieManager.")
 
         elif element == 'CacheManager':
-            print_red(message=f"{enabled_count} Cache Manager added.")
-            add_recommendation(recommendation="Consider adding Cache Manager.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} Cache Manager added.")
+            print_message(message_color=Colors.white, message="Consider adding Cache Manager.")
 
         elif element == 'ConfigTestElement':
-            print_red(message=f"{enabled_count} HTTP Request Defaults added.")
-            add_recommendation(recommendation="Consider adding HTTP Request Defaults.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} HTTP Request Defaults added.")
+            print_message(message_color=Colors.white, message="Consider adding HTTP Request Defaults.")
 
         elif element == 'CSVDataSet':
-            print_green(message=f"{enabled_count} CSV Data Set are added.")
-            add_recommendation(recommendation="Consider adding CSV Data Set.")
+            print_message(message_color=Colors.green, message=f"{enabled_count} CSV Data Set are added.")
+            print_message(message_color=Colors.white, message="Consider adding CSV Data Set.")
 
         elif element == 'ConstantTimer':
-            print_red(message=f"{enabled_count} Timers added.")
-            add_recommendation(recommendation="Consider adding Timers.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} Timers added.")
+            print_message(message_color=Colors.white, message="Consider adding Timers.")
 
         elif element == 'BeanShellSampler':
-            print_green(message=f"{enabled_count} Bean Shell Sampler(s) are enabled.")
-            add_recommendation(recommendation="Consider using JSR223 Sampler.")
+            print_message(message_color=Colors.green, message=f"{enabled_count} Bean Shell Sampler(s) are enabled.")
+            print_message(message_color=Colors.white, message="Consider using JSR223 Sampler.")
 
         elif element == 'HeaderManager':
-            print_red(message=f"{enabled_count} Header Manager are enabled.")
-            add_recommendation(recommendation="Consider adding Header Manager.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} Header Manager are enabled.")
+            print_message(message_color=Colors.white, message="Consider adding Header Manager.")
 
         elif element == 'TestAction':
-            print_red(message=f"{enabled_count} Test Action are enabled.")
-            add_recommendation(recommendation="Consider adding Test Action.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} Test Action are enabled.")
+            print_message(message_color=Colors.white, message="Consider adding Test Action.")
 
         else:
-            # printRed(message)
             pass
 
 
@@ -165,7 +166,7 @@ def find_thread_groups(tree):
             for element in elements['JMeter']['ThreadGroups']:
                 find_thread_groups_status(tree, element)
         except yaml.YAMLError as e:
-            print_red(message=e)
+            print_message(message_color=Colors.red, message=e)
 
 
 def find_thread_groups_status(tree, element):
@@ -193,15 +194,29 @@ def find_thread_groups_status(tree, element):
                 # Set flag for fail
                 flag = 0
         else:
-            print_red(f"No {element} found.")
+            print_message(message_color=Colors.red, message=f"No {element} found.")
     if flag == 1:
-        print_green(message=message)
+        print_message(message_color=Colors.green, message=message)
         enabled_count = 0
     if flag == 0:
-        print_red(message=message)
-        add_recommendation(recommendation=f"Consider enabling one or more {element}.")
+        print_message(message_color=Colors.red, message=message)
+        print_message(message_color=Colors.white, message=f"Consider enabling one or more {element}.")
         enabled_count = 0
     return
+
+
+def validate_test_plan(jmx):
+    """
+    validates the JMeter test plan
+    @param jmx: The file path to the JMX
+    """
+    try:
+        tree = ElementTree.parse(jmx)
+        print_message(message_color=Colors.green, message="Valid JMeter Test Plan")
+        return tree
+    except:
+        print_message(message_color=Colors.red, message="Invalid test plan. Please use the valid JMeter test plan. \n")
+        exit(1)
 
 
 def validate_jmeter_version(tree):
@@ -216,10 +231,10 @@ def validate_jmeter_version(tree):
 
     # Check JMeter Version
     if expected_jmeter_version == jmeter_version[2][1]:
-        print_green(message=f"JMeter version is {jmeter_version[2][1]}.")
+        print_message(message_color=Colors.green, message=f"JMeter version is {jmeter_version[2][1]}.")
     else:
-        print_red(message=f"Found outdated JMeter version: {jmeter_version[2][1]}.")
-        add_recommendation(recommendation="Consider updating to the latest version of JMeter.")
+        print_message(message_color=Colors.red, message=f"Found outdated JMeter version: {jmeter_version[2][1]}.")
+        print_message(message_color=Colors.white, message="Consider updating to the latest version of JMeter.")
 
 
 def get_jmeter_version():
@@ -235,17 +250,3 @@ def get_jmeter_version():
             print(e)
     # Return JMeter Version
     return str(elements['JMeter']['version'])
-
-
-def validate_test_plan(jmx):
-    """
-    validates the JMeter test plan
-    @param jmx: The file path to the JMX
-    """
-    try:
-        tree = parse(jmx)
-        print_green(message="Valid JMeter Test Plan")
-        return tree
-    except:
-        print_red(message="Invalid test plan. Please use the valid JMeter test plan. \n")
-        exit(1)
