@@ -6,6 +6,13 @@ class Exceptions:
 
     @staticmethod
     def check(element, flag, enabled_count, message):
+        """
+        Performs a check for custom logging for Jmeter elements from the Jmx file after validation
+        @param element: the element to validate
+        @param flag: flag to control the custom logging text
+        @param enabled_count: the count of elements that are enabled
+        @param message: default message to print
+        """
         exception_list = {
             "ResultCollector": Exceptions.result_collector,
             "ResponseAssertion": Exceptions.response_assertion,

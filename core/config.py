@@ -5,6 +5,9 @@ config = None
 
 
 def load():
+    """
+    Loads config.yaml configuration into config variable
+    """
     global config
     with open('config.yaml') as file:
         try:
