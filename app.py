@@ -4,6 +4,7 @@ import time
 
 from core.engine import print_message, Colors
 from core.jmx import parse_jmx
+from core import config
 
 
 def main():
@@ -23,9 +24,10 @@ def main():
         )
         args = parser.parse_args()
         jmx = args.jmxfile
+        # load JEval config, this loads config.yaml to a global variable 'config'
+        config.load()
         with open(jmx) as f:
             parse_jmx(jmx)
-            f.close()
     except FileNotFoundError as e:
         print_message(message_color=Colors.red, message=f"An error occured during JEval execution: "
                                                         f"{e.strerror} ({e.filename})")
