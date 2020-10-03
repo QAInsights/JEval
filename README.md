@@ -1,6 +1,6 @@
 # 🚀 JEval
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-1EAEDB)]()
 [![saythanks](https://img.shields.io/badge/say-thanks-1EAEDB.svg)](https://saythanks.io/to/catch.nkn%40gmail.com)
@@ -102,6 +102,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://QAInsights.com"><img src="https://avatars2.githubusercontent.com/u/2826376?v=4" width="100px;" alt=""/><br /><sub><b>NaveenKumar</b></sub></a><br /><a href="https://github.com/QAInsights/JEval/commits?author=QAInsights" title="Code">💻</a></td>
     <td align="center"><a href="https://goo.gl/rTd92i"><img src="https://avatars3.githubusercontent.com/u/6709533?v=4" width="100px;" alt=""/><br /><sub><b>Anthony Gauthier</b></sub></a><br /><a href="https://github.com/QAInsights/JEval/commits?author=delirius325" title="Code">💻</a></td>
+    <td align="center"><a href="http://bit.ly/33oAQDj"><img src="https://avatars0.githubusercontent.com/u/47483946?v=4" width="100px;" alt=""/><br /><sub><b>Leela Prasad</b></sub></a><br /><a href="https://github.com/QAInsights/JEval/commits?author=leelaprasadv" title="Code">💻</a></td>
   </tr>
 </table>
 
