@@ -1,18 +1,13 @@
-Categories - vanilla JMeter
-- Thread Group
-    Thread Group (TG)
-    Setup TG
-    Tear-down TG
-- Config Element
-- Samplers
-    HTTP(S)
-    Debug Sampler
-- Preprocessors
-- Post Preprocessors
-- Timers
-    Constant
-    Gaussian
-- Listeners
-    View Results Tree    
-    Summary Report
-    Aggregate Report
+JMeter Plugins Detection
+
+Following are the most frequently used ones:
+
+1. Dummy Sampler
+2. HTTP2 Request
+3. Random CSV Data Set Config
+4. Throughput Shaping Timer
+5. JMS Send and Receive Sampler
+6. MQTT Protocol
+7. jpgc@Standard Set
+8. 3 Basic graphs
+9. 5 Additional Graphs
