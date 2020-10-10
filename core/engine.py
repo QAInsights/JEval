@@ -39,7 +39,6 @@ def detect_plugins(tree,plugin,plugin_name):
             # Set flag for success
             flag = 1
             message = f"{enabled_count} {plugin}(s) enabled."
-
     #print_message(message_color=Colors.green, message=message)
     Exceptions.check(plugin, flag, enabled_count, message)
 
