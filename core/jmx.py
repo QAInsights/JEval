@@ -18,6 +18,8 @@ def parse_jmx(jmx):
     validate_jmeter_version(tree)
     find_thread_groups(tree)
     element_check(tree)
+    plugins_check(tree)
+
 
 
 def print_art():

@@ -34,4 +34,10 @@ JMeter:
   - DebugSampler
   - JSR223Sampler
   - BeanShellSampler
+  #Official JMeter Plugins
+  Plugins:
+  - DummySampler
+  - UDP
+  - SeleniumWebDriver
+  - Visualizer
   version: "5.3" #Update the latest version of JMeter

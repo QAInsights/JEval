@@ -3,11 +3,11 @@ from utils.display import print_message
 
 
 class Exceptions:
-
+    
     @staticmethod
     def check(element, flag, enabled_count, message):
         """
-        Performs a check for custom logging for Jmeter elements from the Jmx file after validation
+        Performs a check for custom logging for JMeter elements from the JMX file after validation
         @param element: the element to validate
         @param flag: flag to control the custom logging text
         @param enabled_count: the count of elements that are enabled
@@ -26,18 +26,26 @@ class Exceptions:
             "CSVDataSet": Exceptions.csv_data_set,
             "ConstantTimer": Exceptions.constant_timer,
             "HeaderManager": Exceptions.header_manager,
-            "TestAction": Exceptions.test_action
+            "TestAction": Exceptions.test_action,
+            "Visualizer": Exceptions.jp_result_collector
         }
-
         # Get the exception to check from the list
         exception_check = exception_list.get(element, Exceptions.default_choice(flag, message))
-
         if exception_check is not None:
             # Execute the function
             exception_check(flag, enabled_count)
+    @staticmethod
+    def jp_result_collector(flag, enabled_count):        
+        if flag:
+            print_message(message_color=Colors.red, message=f"{enabled_count} Visualizer(s) enabled.")
+            print_message(message_color=Colors.white, message="Consider disabling Plugins Visualizer(s).")
+        else:
+            print_message(message_color=Colors.green, message=f"{enabled_count} Visualizer(s) are enabled.")
+
 
     @staticmethod
     def result_collector(flag, enabled_count):
+        
         if flag:
             print_message(message_color=Colors.red, message=f"{enabled_count} Listener(s) enabled.")
             print_message(message_color=Colors.white, message="Consider disabling Listeners.")
