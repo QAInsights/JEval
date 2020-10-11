@@ -34,6 +34,7 @@ class Exceptions:
         if exception_check is not None:
             # Execute the function
             exception_check(flag, enabled_count)
+
     @staticmethod
     def jp_result_collector(flag, enabled_count):        
         if flag:

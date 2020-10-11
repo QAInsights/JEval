@@ -19,6 +19,7 @@ def plugins_check(tree):
             plugin_name = 'com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler'
         if plugin == 'Visualizer':
             plugin_name = 'kg.apc.jmeter.vizualizers.CorrectedResultCollector'
+        
         detect_plugins(tree, plugin, plugin_name)
 
 def detect_plugins(tree,plugin,plugin_name):
@@ -39,6 +40,10 @@ def detect_plugins(tree,plugin,plugin_name):
             # Set flag for success
             flag = 1
             message = f"{enabled_count} {plugin}(s) enabled."
+        else:
+            message = f"No {plugin} enabled."
+            # Set flag for fail
+            flag = 0
     #print_message(message_color=Colors.green, message=message)
     Exceptions.check(plugin, flag, enabled_count, message)
 
