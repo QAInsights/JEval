@@ -24,13 +24,25 @@ def main():
         )
         args = parser.parse_args()
         jmx = args.jmxfile
-        # load JEval config, this loads config.yaml to a global variable 'config'
-        config.load()
+
+        # Loads base configuration
+        load_configurations()
+
         with open(jmx) as f:
             parse_jmx(jmx)
+
     except FileNotFoundError as e:
         print_message(message_color=Colors.red, message=f"An error occured during JEval execution: "
                                                         f"{e.strerror} ({e.filename})")
+
+
+def load_configurations():
+    """
+     Load JEval config, this loads config.yaml to a global variable 'config'
+     Load custom plugin mappings
+    """
+    config.load()
+    config.load_plugin_mappings()
 
 
 if __name__ == "__main__":
