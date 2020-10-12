@@ -95,13 +95,13 @@ To view the log, open the `tmp.log` file.
     You can add custom plugins in `config.yaml` file under Custom tag, as shown in below example.
     ```yaml
         Custom:
-          "Plugin1": "org.Sample.plugin.name",
-          "DummySampler": "kg.apc.jmeter.samplers.DummySampler"
+          Plugin1: org.Sample.plugin.name
+          DummySampler: kg.apc.jmeter.samplers.DummySampler
     ```
 
 # 🛑 Limitations
 
-* TDB.
+* TBD.
 
 # 💰 Donate
 ☕ <a target="_blank" href="https://www.buymeacoffee.com/qainsights">Buy me a tea</a>
