@@ -92,12 +92,11 @@ To view the log, open the `tmp.log` file.
     - SeleniumWebDriver
     - Visualizer
 
-    You can add custom elements in a `plugin-mappings.json` file (should be in root project folder path), as shown in below example.
-    ```js
-        {
+    You can add custom plugins in `config.yaml` file under Custom tag, as shown in below example.
+    ```yaml
+        Custom:
           "Plugin1": "org.Sample.plugin.name",
-          "DummySampler": 'kg.apc.jmeter.samplers.DummySampler'
-        }
+          "DummySampler": "kg.apc.jmeter.samplers.DummySampler"
     ```
 
 # 🛑 Limitations

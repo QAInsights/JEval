@@ -4,7 +4,7 @@ from core.attribute_check import *
 from core import config as setup
 from utils.display import print_message, Colors
 from core.exceptions import Exceptions
-from core.plugins import get_plugin_full_name
+from core.plugins import PluginFactory
 
 
 def plugins_check(tree):
@@ -12,8 +12,10 @@ def plugins_check(tree):
     Checks for JMeter Plugins in JMeter
     @param tree: Parsed JMX file
     """
-    for plugin in setup.config['JMeter']['Plugins']:
-        plugin_full_name = get_plugin_full_name(plugin)
+    plugins_factory = PluginFactory()
+    plugins_factory.load_custom_plugin_mappings()
+    for plugin in plugins_factory.plugins:
+        plugin_full_name = plugins_factory.get_plugin_full_name(plugin)
         if plugin_full_name is not None:
             find_element_status(tree, plugin, plugin_full_name)
 
@@ -48,6 +50,9 @@ def find_element_status(tree, element, plugin_name=None):
         message = f"No plugin found for {plugin_name}."
         lookup_element = deepcopy(plugin_name)
 
+        if not count_node(root, lookup_element) > 0:
+            print_message(message_color=Colors.red, message=message)
+
     for node in root.iter(lookup_element):
         if node.attrib is None:
             print_message(message_color=Colors.red, message=message)
@@ -74,10 +79,7 @@ def count_node(root, element):
     @param element: the element to count to
     @return: the number of nodes as integer
     """
-    count = 0
-    for node in root.iter(element):
-        count += 1
-    return count
+    return len(list(root.iter(element)))
 
 
 def find_thread_groups(tree):

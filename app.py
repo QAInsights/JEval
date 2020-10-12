@@ -25,8 +25,8 @@ def main():
         args = parser.parse_args()
         jmx = args.jmxfile
 
-        # Loads base configuration
-        load_configurations()
+        # Loads base configuration from config.yaml
+        config.load()
 
         with open(jmx) as f:
             parse_jmx(jmx)
@@ -34,15 +34,6 @@ def main():
     except FileNotFoundError as e:
         print_message(message_color=Colors.red, message=f"An error occured during JEval execution: "
                                                         f"{e.strerror} ({e.filename})")
-
-
-def load_configurations():
-    """
-     Load JEval config, this loads config.yaml to a global variable 'config'
-     Load custom plugin mappings
-    """
-    config.load()
-    config.load_plugin_mappings()
 
 
 if __name__ == "__main__":
