@@ -86,7 +86,7 @@ To view the log, open the `tmp.log` file.
 
     If you want to add custom elements, you can add it in the `config.yaml` file. 
 
-    **JMeter (default) Plugins**
+    **JMeter Plugins (default)**
     - DummySampler
     - UDP
     - SeleniumWebDriver
