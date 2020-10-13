@@ -57,36 +57,51 @@ To view the log, open the `tmp.log` file.
 
 * JEval detects the JMeter version and validates the test plan.
 
-* JEval detects following JMeter elements
-  - AuthManager
-  - CookieManager
-  - HeaderManager
-  - CacheManager
-  - CSVDataSet  
-  - TransactionController  
-  - ConfigTestElement
-  - ConstantTimer
-  - UniformRandomTimer
-  - GaussianRandomTimer
-  - Arguments
-  - ProxyControl
-  - RegexExtractor
-  - TestAction
-  - BeanShellSampler
-  - JSR223Sampler
-  - IfController
-  - LoopController
-  - ResultCollector
-  - ResponseAssertion
-  - XPath2Assertion
-  - JSONPathAssertion
-  - DebugSampler
+* JEval detects following:
+ 
+    **JMeter elements**
+    - AuthManager
+    - CookieManager
+    - HeaderManager
+    - CacheManager
+    - CSVDataSet  
+    - TransactionController  
+    - ConfigTestElement
+    - ConstantTimer
+    - UniformRandomTimer
+    - GaussianRandomTimer
+    - Arguments
+    - ProxyControl
+    - RegexExtractor
+    - TestAction
+    - BeanShellSampler
+    - JSR223Sampler
+    - IfController
+    - LoopController
+    - ResultCollector
+    - ResponseAssertion
+    - XPath2Assertion
+    - JSONPathAssertion
+    - DebugSampler
 
-If you want to add custom elements, you can add it in the `config.yaml` file. 
+    If you want to add custom elements, you can add it in the `config.yaml` file. 
+
+    **JMeter (default) Plugins**
+    - DummySampler
+    - UDP
+    - SeleniumWebDriver
+    - Visualizer
+
+    You can add custom plugins in `config.yaml` file under Custom tag, as shown in below example.
+    ```yaml
+        Custom:
+          Plugin1: org.Sample.plugin.name
+          DummySampler: kg.apc.jmeter.samplers.DummySampler
+    ```
 
 # 🛑 Limitations
 
-* Doesn't detect JMeter plugins yet.
+* TBD.
 
 # 💰 Donate
 ☕ <a target="_blank" href="https://www.buymeacoffee.com/qainsights">Buy me a tea</a>

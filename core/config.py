@@ -11,7 +11,7 @@ def load():
     global config
     with open('config.yaml') as file:
         try:
-            # Reading Config file and parsing JMX (once)
+            # Reading Config file
             config = yaml.safe_load(file)
         except yaml.YAMLError as e:
             print_message(message_color=Colors.red, message=e)

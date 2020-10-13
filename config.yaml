@@ -36,8 +36,12 @@ JMeter:
   - BeanShellSampler
   #Official JMeter Plugins
   Plugins:
-  - DummySampler
-  - UDP
-  - SeleniumWebDriver
-  - Visualizer
+    Default:
+      - DummySampler
+      - UDP
+      - SeleniumWebDriver
+      - Visualizer
+    Custom:
+      # Add custom plugin mappings below here (key: value) - for details check README.md
+
   version: "5.3" #Update the latest version of JMeter
