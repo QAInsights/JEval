@@ -57,7 +57,7 @@ To view the log, open the `tmp.log` file.
 
 * JEval detects the JMeter version and validates the test plan.
 
-* JEval detects following:
+* JEval detects the following:
  
     **JMeter elements**
     - AuthManager
@@ -101,7 +101,7 @@ To view the log, open the `tmp.log` file.
 
 # 🛑 Limitations
 
-* TBD.
+* If the elements added inside `Controllers` elements e.g. `Loop Controller`, then those elements will not be detected.
 
 # 💰 Donate
 ☕ <a target="_blank" href="https://www.buymeacoffee.com/qainsights">Buy me a tea</a>
