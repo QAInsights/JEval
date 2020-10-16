@@ -94,7 +94,7 @@ class Exceptions:
     @staticmethod
     def cookie_manager(flag, enabled_count):
         if not flag:
-            print_message(message_color=Colors.green, message=f"{enabled_count} CookieManager added.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} CookieManager added.")
             print_message(message_color=Colors.white, message="Consider adding CookieManager.")
 
     @staticmethod
@@ -112,7 +112,7 @@ class Exceptions:
     @staticmethod
     def csv_data_set(flag, enabled_count):
         if not flag:
-            print_message(message_color=Colors.green, message=f"{enabled_count} CSV Data Set are added.")
+            print_message(message_color=Colors.red, message=f"{enabled_count} CSV Data Set are added.")
             print_message(message_color=Colors.white, message="Consider adding CSV Data Set.")
 
     @staticmethod
