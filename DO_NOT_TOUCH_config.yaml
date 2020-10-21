@@ -1,5 +1,4 @@
-#Do not change the format of this yaml. This is just a back up of the `config.yaml`.
-#In case if you misconfigured, you can copy the below structure and paste it in the `config.yaml`.
+#Do not change the format of this yaml. However you can add/remove the JMeter > Elements list.
 JMeter:
   ThreadGroups:
   - ThreadGroup
@@ -35,4 +34,14 @@ JMeter:
   - DebugSampler
   - JSR223Sampler
   - BeanShellSampler
+  #Official JMeter Plugins
+  Plugins:
+    Default:
+      - DummySampler
+      - UDP
+      - SeleniumWebDriver
+      - Visualizer
+    Custom:
+      # Add custom plugin mappings below here (key: value) - for details check README.md
+
   version: "5.3" #Update the latest version of JMeter
